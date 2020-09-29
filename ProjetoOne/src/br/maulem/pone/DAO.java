@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -30,6 +31,12 @@ private Connection connection = null;
 			aPost.setId(rs.getInt("id"));
 			aPost.setTexto(rs.getString("texto"));
 			aPost.setCriador(rs.getString("criador"));
+			aPost.setStatus(rs.getString("status"));
+			
+			Calendar data = Calendar.getInstance();
+			data.setTime(rs.getDate("criado"));
+			aPost.setData(data);
+			
 			posts.add(aPost);
 			}
 		rs.close();
@@ -38,19 +45,22 @@ private Connection connection = null;
 		}
 	
 	public void addPost(Post aPost) throws SQLException{
-		String sql = "INSERT INTO Post"+"(texto,criador) values(?,?)";
+		String sql = "INSERT INTO Post"+"(texto,criador,status,criado) values(?,?,?,?)";
 		PreparedStatement stmt = connection.prepareStatement(sql);
-		stmt.setString(1,aPost.getTexto());
-		stmt.setString(2,aPost.getCriador());
+		stmt.setString(1, aPost.getTexto());
+		stmt.setString(2, aPost.getCriador());
+		stmt.setString(3, aPost.getStatus());
+		stmt.setDate(4, new java.sql.Date(aPost.getData().getTimeInMillis()));
 		stmt.execute();
 		stmt.close();
 		}
 	
 	public void changePost(Post aPost) throws SQLException{
-		String sql ="UPDATE Post SET " +"texto=?, criador=? WHERE id=?";
+		String sql ="UPDATE Post SET " +"texto=?, criador=?, status=? WHERE id=?";
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		stmt.setString(1, aPost.getTexto());
 		stmt.setString(2, aPost.getCriador());
+		stmt.setString(3, aPost.getStatus());
 		stmt.setInt(3, aPost.getId());
 		stmt.execute();stmt.close();
 		}

@@ -2,7 +2,6 @@ package br.maulem.pone;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,41 +10,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Show")
-public class Show extends HttpServlet {
 
+@WebServlet("/attPost")
+public class attPost extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("formF5.html");
+		dispatcher.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAO dao = null;
 		try {
 			dao = new DAO();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
 		}
-		List<Post> posts = null;
+		Post post = new Post();
+		post.setId(Integer.valueOf(request.getParameter("id")));
+		post.setTexto(request.getParameter("texto"));
+		post.setCriador(request.getParameter("criador"));
+		
 		try {
-			posts = dao.getPost();
+			dao.changePost(post);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("posts", posts);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("show.jsp");
-		dispatcher.forward(request, response);
-		
+		response.sendRedirect("show");
 		try {
 			dao.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-		
-		
 	}
 
 }

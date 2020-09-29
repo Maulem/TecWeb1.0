@@ -6,8 +6,16 @@ public class Post {
 	private Integer id;
 	private String texto;
 	private String criador;
+	private String status;
 	private Calendar data;
 	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Calendar getData() {
 		return data;
 	}

@@ -1,7 +1,14 @@
 package br.maulem.pone;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,6 +38,20 @@ public class newPost extends HttpServlet {
 		Post post = new Post();
 		post.setTexto(request.getParameter("texto"));
 		post.setCriador(request.getParameter("criador"));
+		post.setStatus(request.getParameter("status"));
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		Date data = null;
+		try {
+			data = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(dtf.format(now));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		Calendar dataCreated = Calendar.getInstance();
+		dataCreated.setTime(data);
+		post.setData(dataCreated);
 
 		try {
 			dao.addPost(post);
@@ -38,7 +59,7 @@ public class newPost extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		response.sendRedirect("Show");
+		response.sendRedirect("show");
 		try {
 			dao.close();
 		} catch (SQLException e) {

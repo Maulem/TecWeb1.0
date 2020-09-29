@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Criando novo Post</title>
+	<meta charset="ISO-8859-1">
+	<title>Creating new wish</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
+	<style>
+		.title {
+			font-size: 5rem;
+			font-family: 'Noto Serif', serif;
+			display: flex;
+			text-align: center;
+			margin-bottom: 0rem;
+		}
+		body {
+			display: flex;
+			justify-content: center;
+			background-color: #03183d;
+			font-family:'Spartan', sans-serif;
+		}
+		main {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: white;
+			min-width: 30rem;
+			margin: 5rem;
+			padding-bottom: 5rem;
+			padding-right: 2rem;
+			padding-left: 2rem;
+			border-style: solid;
+			border-color: #1c87c9;
+			border-radius: 0.5rem;
+			border-width: 0.1rem;
+		}
+		form {
+			display: flex;
+			justify-content: flex-end;
+			flex-direction: column;
+			width: 12rem;
+		}
+
+		p {
+			text-align: center;
+			font-size: 2rem;
+		}
+		.input {
+			width: 10rem;
+			align-self: center;
+			margin-top: -1.5rem;
+			font-size: 1.3rem;
+		}
+	</style>
 </head>
 <body>
-<form method='post'>
-Texto: <input type='text' name='texto'><br>
-Criador: <input type='text' name='criador'><br>
-<input type='submit' value='Submit'>
-</form>
+	<main>
+		<h1 class="title">Wishbook</h1>
+		<form method="post">
+			
+				<p>Wish:      </p><input class="input" type="text" required="required" name="texto"><br>
+			
+				<p>Creator: </p><input class="input" type="text" name="criador"><br>
+			
+				<p>Status:    </p><input class="input" list="status" required="required" name="status"><br>
+			
+			<datalist id="status">
+				<option value="To do">
+				<option value="Doing">
+				<option value="Done">
+			</datalist>
+			<input type="submit" value="Submit">
+		</form>
+	</main>
 </body>
 </html>

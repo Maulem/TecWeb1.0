@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>ProjetoOne</display-name>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,4 +10,41 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>showPage</servlet-name>
+ 	<servlet-class>br.maulem.pone.Show</servlet-class>
+  </servlet>
+  <servlet-mapping>
+ 	<servlet-name>showPage</servlet-name>
+ 	<url-pattern>/show</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>newPage</servlet-name>
+ 	<servlet-class>br.maulem.pone.newPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+ 	<servlet-name>newPage</servlet-name>
+ 	<url-pattern>/new</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>attPage</servlet-name>
+ 	<servlet-class>br.maulem.pone.attPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+ 	<servlet-name>attPage</servlet-name>
+ 	<url-pattern>/f5</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>delPage</servlet-name>
+ 	<servlet-class>br.maulem.pone.delPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+ 	<servlet-name>delPage</servlet-name>
+ 	<url-pattern>/del</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
