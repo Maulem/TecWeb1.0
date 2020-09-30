@@ -24,12 +24,23 @@ public class Show extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		
 		List<Post> posts = null;
 		try {
 			posts = dao.getPost();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		userNow user = null;
+		try {
+			user = dao.getUserNow();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		String name = user.getUsername();
+		request.setAttribute("name", name);
 		request.setAttribute("posts", posts);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("show.jsp");
 		dispatcher.forward(request, response);

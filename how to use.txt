@@ -1,0 +1,59 @@
+mysql> CREATE DATABASE Proj;
+
+mysql> USE Proj;
+
+mysql> CREATE TABLE Post (
+ id INT NOT NULL AUTO_INCREMENT,
+ texto TEXT NOT NULL,
+ criador VARCHAR(30),
+ status VARCHAR(5),
+ criado DATE,
+ 
+ PRIMARY KEY (ID)
+);
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Ir para praia', 'Cleber', 'To do', '20201123');
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Caçar aguas vivas', 'Geoducos', 'Done', '20190923');
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Plantar na horta', 'Cincinato', 'Doing', '20180921');
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Comprar uma lancha', 'Joana', 'To do', '20200513');
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Desmaiar', 'Afonso', 'Done', '20200126');
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Ser feliz', 'Maulem', 'Doing', '20200802');
+
+mysql> INSERT INTO Proj (texto, criador, status, criado)
+VALUES ('Festejar', 'Maulem', 'Done', '20200812');
+
+mysql> CREATE TABLE User (
+ username VARCHAR(30),
+ password VARCHAR(30)
+);
+
+mysql> INSERT INTO User (username, password)
+VALUES ('Maulem','12345');
+
+mysql> INSERT INTO User (username, password)
+VALUES ('Joao','67890');
+
+mysql> INSERT INTO User (username, password)
+VALUES ('Camila','12345');
+
+mysql> INSERT INTO User (username, password)
+VALUES ('Cincinato','67890');
+
+
+mysql> CREATE TABLE now (
+ username VARCHAR(30)
+);
+
+mysql> INSERT INTO now (username)
+VALUES ('Maulem');

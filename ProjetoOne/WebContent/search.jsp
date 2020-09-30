@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
-
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<%@ page import="java.util.*,br.maulem.pone.*"%>
-
+    pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Wishbook</title>
+	<title>Search result</title>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
 	<style>
@@ -28,8 +23,8 @@ pageEncoding="ISO-8859-1"%>
 			font-family: 'Noto Serif', serif;
 			display: flex;
 			text-align: center;
-			margin-bottom: -1rem;
-			margin-top: 5rem;
+			margin-bottom: 2rem;
+			margin-top: 2rem;
 		}
 		
 		body {
@@ -125,6 +120,7 @@ pageEncoding="ISO-8859-1"%>
 			justify-content: center;
 			margin-left: 0.5rem;
 			margin-right: 0.5rem;
+			margin-top: 2rem;
 			
 		}
 		
@@ -141,69 +137,30 @@ pageEncoding="ISO-8859-1"%>
 			margin-top: 5rem;
 		}
 		
-		.p {
-			margin-top: 0rem;
-		}
-		
 	</style>
 </head>
 <body>
 	<main>
 		<h1 class="title">Wishbook</h1>
 		<h2 class="welcome">Welcome ${name}</h2>
-		<div class="botoes">
-			<div class="filtro">
-				<p class="p">Order by:</p>
-				<form action="filter" method="post">
-					<select name="filter" required>
-						<option value="1">Text</option>
-				    	<option value="2">Creator</option>
-				    	<option value="3">Status</option>
-				    	<option value="4">Data</option>
-					</select>
-					<input type="hidden" name="username" value="${name}">
-					<input type="submit" value="Filter">
-				</form>
-			</div>
-			<a href="new" class="button">New wish</a>
-			<form class="pesquisa" action="search" method="get">
-				<input type="text" name="input" placeholder="search here the exact term">
-				<input type="hidden" name="username" value="${name}">
-				<input type="submit" value="Search">
-			</form>
-		</div>
 		<table>
 			<tr>
 				<th>Wish</th>
 				<th>Creator</th>
 				<th>Status</th>
 				<th>Created on</th>
-				<th>Change wish</th>
 			</tr>
-			<c:forEach var="aPost" items="${posts}">
-				<tr>
-				<td class="td">${aPost.getTexto()}</td>
-				<td class="td">${aPost.getCriador()}</td>
-				<td class="td">${aPost.getStatus()}</td>
-				<td class="td">${aPost.getData().getTime()}</td>
-				<td class="tb">
-					<form action="attPost" method="get">
-						<input type="hidden" name="id" value="${aPost.getId()}">
-						<input type="hidden" name="text" value="${aPost.getTexto()}">
-						<input type="hidden" name="creator" value="${aPost.getCriador()}">
-						<input type="hidden" name="stat" value="${aPost.getStatus()}">
-						<input class="buttonlist" type="submit" value="Edit wish">
-					</form>
-				
-				
-					<form action="delPost" method="post">
-						<input type="hidden" name="id" value="${aPost.getId()}">
-						<input class="buttonlist" type="submit" value="Delete wish">
-					</form>
-				</td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<td class="td">${post.texto}</td>
+				<td class="td">${post.criador}</td>
+				<td class="td">${post.status}</td>
+				<td class="td">${post.data.getTime()}</td>
+			</tr>
 		</table>
+		<form action="search" method="post">
+			<input type="hidden" name="username" value="${name}">
+			<input class="buttonlist" type="submit" value="Go back">
+		</form>
 	</main>
 </body>
 </html>

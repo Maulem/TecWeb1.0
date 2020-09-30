@@ -1,8 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ page import="java.util.*,br.maulem.pone.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Creating new wish</title>
+	<title>Editing a wish</title>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet">
 	<style>
@@ -45,7 +53,7 @@
 		p {
 			text-align: center;
 			font-size: 1.5rem;
-			margin-top: -0.2rem;
+			margin-top: -0.5rem;
 		}
 		.input {
 			width: 10rem;
@@ -85,16 +93,15 @@
 	<main>
 		<h1 class="title">Wishbook</h1>
 		<form method="post">
-			
-				<p>Wish:      </p><input class="input" type="text" required="required" name="texto"><br>
-				<p>Status:    </p><input class="input" list="status" required="required" name="status"><br>
-			
+			<input class="input" type="hidden" name="id" value="${id}"><br>
+			<p>New wish:</p> <input class="input" type="text" name="texto" required="required" value="${text}"><br>
+			<p>New status:</p> <input class="input" type="text" name="status" required="required" placeholder="Previous: ${stat}"><br>
+			<input class="buttonlist" type="submit" value="Submit">
 			<datalist id="status">
 				<option value="To do">
 				<option value="Doing">
 				<option value="Done">
 			</datalist>
-			<input class="buttonlist" type="submit" value="Submit">
 		</form>
 	</main>
 </body>

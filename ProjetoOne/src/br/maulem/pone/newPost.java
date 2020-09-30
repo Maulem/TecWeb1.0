@@ -35,9 +35,17 @@ public class newPost extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e3) {
 			e3.printStackTrace();
 		}
+		
+		userNow user = null;
+		try {
+			user = dao.getUserNow();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 		Post post = new Post();
 		post.setTexto(request.getParameter("texto"));
-		post.setCriador(request.getParameter("criador"));
+		post.setCriador(user.getUsername());
 		post.setStatus(request.getParameter("status"));
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -49,6 +57,7 @@ public class newPost extends HttpServlet {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+		
 		Calendar dataCreated = Calendar.getInstance();
 		dataCreated.setTime(data);
 		post.setData(dataCreated);
@@ -60,6 +69,7 @@ public class newPost extends HttpServlet {
 		}
 		
 		response.sendRedirect("show");
+		
 		try {
 			dao.close();
 		} catch (SQLException e) {
